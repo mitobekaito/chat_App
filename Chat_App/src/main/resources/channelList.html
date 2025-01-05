@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Channel List</title>
+  <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #4a4a4a;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        a {
+            color: #4ecdc4;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input {
+            width: calc(100% - 120px);
+            padding: 0.5rem;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #99FF99;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #33FFCC;
+        }
+        .logout {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .logout button {
+            background-color: #CC0000;
+        }
+        .logout button:hover {
+            background-color: #9900CC;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+  <h1>チャットチャンネル</h1>
+  <ul>
+    <li th:each="channel : ${channels}">
+      <a th:href="@{/chat/{channelName}(channelName=${channel.name})}" th:text="${channel.name}"></a>
+    </li>
+  </ul>
+  <form th:action="@{/createChannel}" method="post">
+    <input type="text" name="channelName" placeholder="チャンネル名を入力してください（例：２ちゃんねる）" required>
+    <button type="submit">チャンネル創造</button>
+  </form>
+  <div class="logout">
+    <form th:action="@{/logout}" method="post">
+      <button type="submit">ログアウト</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>
