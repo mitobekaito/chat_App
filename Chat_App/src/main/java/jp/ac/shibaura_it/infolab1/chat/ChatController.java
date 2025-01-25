@@ -57,7 +57,7 @@ public class ChatController {
     }
 
     // チャットページの表示
-    @GetMapping("/jp/ac/shibaura_it/infolab1/chat")
+    @GetMapping("/chat")
     public String chat(HttpSession session, Model model) {
         String username = (String) session.getAttribute("username");
         if (username == null) {
@@ -82,7 +82,7 @@ public class ChatController {
     }
 
     // チャットルームページの表示
-    @GetMapping("/jp/ac/shibaura_it/infolab1/chat/{channelName}")
+    @GetMapping("chat/{channelName}")
     public String chatRoom(@PathVariable String channelName, HttpSession session, Model model) {
         String username = (String) session.getAttribute("username");
         if (username == null) {
@@ -101,7 +101,7 @@ public class ChatController {
     }
 
     // メッセージの送信
-    @PostMapping("/jp/ac/shibaura_it/infolab1/chat/{channelName}/send")
+    @PostMapping("chat/{channelName}/send")
     public String sendMessage(@PathVariable String channelName, @RequestParam String content,
                               @RequestParam(required = false) Integer parentId, HttpSession session) {
         String username = (String) session.getAttribute("username");
@@ -120,7 +120,7 @@ public class ChatController {
     }
 
     // メッセージにリアクションを追加
-    @PostMapping("/jp/ac/shibaura_it/infolab1/chat/{channelName}/react")
+    @PostMapping("chat/{channelName}/react")
     public String addReaction(@PathVariable String channelName,
                               @RequestParam int messageId,
                               @RequestParam String emoji,
